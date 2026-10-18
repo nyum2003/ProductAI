@@ -2,7 +2,7 @@
 
 A responsive, dependency-free pricing and booking desk for independent venues, based on the included PRD.
 
-The home screen compares flat rental, door split, and a minimum venue guarantee using owner-entered costs and attendance scenarios. See [PRICING-MVP.md](PRICING-MVP.md) for formulas, deal definitions, controls, and five pricing acceptance tests. The original booking desk remains at `booking.html`.
+The home screen compares Flat Rate, Door Split, Base + Door Split, and Hybrid using owner-entered costs and attendance scenarios. See [PRICING-MVP.md](PRICING-MVP.md) for formulas, deal definitions, controls, and five pricing acceptance tests. The original booking desk remains at `booking.html`.
 
 ## Run locally
 
@@ -42,7 +42,7 @@ Each visitor has their own browser-local workspace. Venue settings, inquiries, a
 
 ## Validation
 
-`node --test tests/engine.test.cjs tests/research.test.cjs tests/pricing.test.cjs` tests feasibility boundaries, booked-date conflicts, unknown fields, email extraction, research counting, and pricing arithmetic. Node.js is needed only to run these tests. Browser QA should cover onboarding, import, editing, approval, email handoff, refresh persistence, and mobile layouts.
+`node --test tests/engine.test.cjs tests/research.test.cjs tests/pricing.test.cjs tests/time.test.cjs` tests feasibility boundaries, booked-date conflicts, unknown fields, email extraction, research counting, and pricing arithmetic. Node.js is needed only to run these tests. Browser QA should cover onboarding, import, editing, approval, email handoff, refresh persistence, and mobile layouts.
 
 Website deployment is separate from publishing the source to GitHub.
 

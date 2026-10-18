@@ -1,41 +1,38 @@
-# StageFit pricing MVP
+# StageFit pricing desk v2
 
-The home screen is now a pricing desk. The original booking workflow remains at `booking.html`; customer validation remains at `research.html`.
+Staging: http://127.0.0.1:4173. Four models replace the previous MVG option.
 
-## Core task
+## Models
 
-Choose an inquiry, enter event costs and ticket assumptions, compare three deal structures, choose acceptable terms, and prepare an owner-approved offer. Test whether an independent venue owner can choose and explain an acceptable deal in under 10 minutes.
+- Flat Rate is the fixed venue payout, no lower than the editable baseline.
+- Door Split is a percentage of actual net ticket revenue. Expected ticket sales must meet the minimum and fund the baseline before a pure split can be approved. Low sales still show actual revenue, not an inflated minimum.
+- Base + Door Split adds a base payment at least equal to the baseline PLUS a separate share of actual net ticket revenue.
+- Hybrid pays Flat Rate below the minimum ticket count. Above it, choose the greater of Flat Rate or Door Split. These amounts are never added together.
 
-## Explicit deal definitions
+Minimum Expected Sales is a whole-ticket planning constraint. Its lower bound is the ticket count needed for the entered share to fund the baseline (rounded up). Its upper bound is approved capacity. Impossible splits are flagged. These are arithmetic feasibility bounds, not demand forecasts.
 
-- **Flat rental:** promoter pays the entered all-in fee to the venue regardless of ticket sales.
-- **Door split:** venue receives the entered percentage of ticket gross after the entered per-ticket fees.
-- **Minimum venue guarantee:** promoter pays the venue the greater of the entered minimum or the door split. The guarantee is a minimum paid to the venue, not an artist guarantee and not added on top of the split.
+## Profit controls
 
-For all three structures, the venue pays the entered room operations, staffing, security, and equipment costs. Flat rental is the price charged; room operations is a cost. They are intentionally distinct.
+Margin = (venue payout - entered event costs) / venue payout. Enter a desired lower and upper margin (0–80%, a supported UI range, not an industry benchmark), then select a target inside it.
 
-Venue contribution = venue income minus these costs. Promoter remainder = net ticket revenue minus venue income, before artist payments and other promoter costs. A negative promoter remainder is a funding shortfall, not a calculator error. Contribution is not net profit; tax, other overhead, and bar sales are excluded.
+Margin and attendance sliders immediately fill offer inputs: target payout is costs / (1 - target margin), rounded up to cents and at least the baseline. Flat Rate becomes that payout; Door Split percentage targets it from expected net ticket revenue. Base stays at baseline, and its additional share targets the difference. Shares round up to 0.1% and are capped at 100%. The UI flags insufficient ticket revenue and out-of-range actual margins.
 
-Break-even attendance and attendance needed to meet the contribution target round up to whole guests. A fixed fee that covers the relevant threshold is labeled “Covered by fixed fee”; zero per-guest yield can make a threshold unreachable. A computed threshold above capacity is explicitly flagged.
+Minimum-sales slider changes adjust the constraint without changing negotiated terms. Manual number edits require Recalculate. All changes invalidate previous drafts and approvals. Exceptions are required for below-baseline or below-margin downside and expected margins outside the range. Margin excludes taxes and unentered overhead.
 
-## Owner controls
+## Room and time
 
-All inputs are owner assumptions. The page identifies the deal with the highest contribution in the low-attendance scenario; it does not recommend market pricing or predict demand. Selecting a different deal or recalculating invalidates the prior draft and approval. Unsaved input changes disable deal selection and offer actions until recalculation.
+Square Footage is descriptive and stored with venue settings. Approved capacity is independent; legal occupancy is not calculated from area. Curfew and finish controls explicitly use AM/PM, with normalized internal time comparisons. Imported emails accept AM/PM and existing 24-hour text.
 
-The owner must review the offer. If low-attendance contribution is below the target, an explicit exception reason is required. Existing venue feasibility rules must pass before preparing an offer. Approval saves a local snapshot of inputs, venue, event, and scenario economics. A download or mailto handoff follows; nothing sends automatically.
+## Acceptance checks
 
-## Five pricing acceptance tests
+1. Default Flat Rate $1,920 minus event costs $940 leaves $980 in all scenarios.
+2. Door Split at 35% with 240 tickets at $25 less $1.50 fees pays $1,974. At 120 tickets it pays $987 even though minimum expected sales is 234.
+3. A $1,920 base plus 10% pays $2,484 at 240 guests.
+4. Hybrid pays $1,920 at 120 guests and $1,974 at 240 when the threshold is 234. With threshold 300 it still pays Flat Rate at 240.
+5. At target margin 55%, default costs and attendance produce Flat Rate $2,088.89, split 37.1%, base $1,920, and additional share 3%.
+6. Reject sales minimum above capacity or below its computed bound; flag impossible splits.
+7. After approval, moving any pricing slider clears the prior offer. Refresh preserves valid values and room details.
+8. Curfew 11:00 PM accepts 10:30 PM finish and rejects 11:30 PM. Test noon and midnight too.
+9. At mobile width, all four models and three scenario columns remain available.
 
-1. With the default costs of $940 and a $1,920 flat rental, verify venue contribution is $980 in every attendance scenario.
-2. At 240 guests, a $25 ticket, $1.50 fee, and a 35% venue split, verify gross revenue is $6,000, fees $360, venue income $1,974, and contribution $1,034.
-3. Select the $1,200 minimum venue guarantee. At 120 guests, verify income is $1,200, not $2,187. At 240 guests it is $1,974, not $3,174.
-4. Prepare an offer for a deal below the $750 downside target. Verify approval requires an exception reason and the review checkbox. Edit assumptions and confirm recalculation clears the previous approval. A conflicting inquiry must not enable a pricing offer.
-5. Refresh after approving and verify persistence. At mobile width, compare deals and read scenario economics. Research test sessions must remain separate from pricing scenarios and demo inquiry counts.
-
-Automated arithmetic tests: `node --test tests/pricing.test.cjs`.
-
-## Demo story
-
-Show the same inquiry under each structure. Ask what the venue keeps at low turnout, then adjust the flat fee or venue share and show the change. Prepare an offer and demonstrate the owner’s review and downside exception controls. State that prices and turnout are user inputs, not external market data or AI forecasts.
-
-Customer feedback, willingness to accept these terms, and willingness to pay for StageFit remain unvalidated. Use the neutral observation protocol in Customer validation, now focused on choosing and explaining a deal.
+Run node --test tests/*.test.cjs with Node.js. Browser-local data remains separate per visitor. No inbox sync, external AI, market forecasting, or shared cloud storage is connected.

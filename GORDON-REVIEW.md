@@ -1,5 +1,7 @@
 # Judge-style review and presentation plan
 
+Current staging revision: see [PRICING-MVP.md](PRICING-MVP.md) for four pricing structures, margin sliders, and sales constraints. Older guarantee examples below describe the previous prototype.
+
 This is an interpretation of the supplied workshop advice, not Gordon Ho’s actual assessment, a scoring rubric, or a promise of his preference. The transcript has transcription errors and conflicting discussion of video permissions. Confirm final competition submission rules with the organizers; do not assume embedded video, internet access, or a live demo will be available.
 
 ## The judgment the team needs to earn
