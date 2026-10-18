@@ -1,6 +1,8 @@
 # StageFit AI MVP
 
-A responsive, dependency-free booking desk for independent venues, based on the included PRD.
+A responsive, dependency-free pricing and booking desk for independent venues, based on the included PRD.
+
+The home screen compares flat rental, door split, and a minimum venue guarantee using owner-entered costs and attendance scenarios. See [PRICING-MVP.md](PRICING-MVP.md) for formulas, deal definitions, controls, and five pricing acceptance tests. The original booking desk remains at `booking.html`.
 
 ## Run locally
 
@@ -40,7 +42,7 @@ Each visitor has their own browser-local workspace. Venue settings, inquiries, a
 
 ## Validation
 
-`node --test tests/engine.test.cjs tests/research.test.cjs` tests feasibility boundaries, booked-date conflicts, unknown fields, email extraction, and research counting. Node.js is needed only to run these tests. Browser QA should cover onboarding, import, editing, approval, email handoff, refresh persistence, and mobile layouts.
+`node --test tests/engine.test.cjs tests/research.test.cjs tests/pricing.test.cjs` tests feasibility boundaries, booked-date conflicts, unknown fields, email extraction, research counting, and pricing arithmetic. Node.js is needed only to run these tests. Browser QA should cover onboarding, import, editing, approval, email handoff, refresh persistence, and mobile layouts.
 
 Website deployment is separate from publishing the source to GitHub.
 
@@ -49,3 +51,7 @@ Website deployment is separate from publishing the source to GitHub.
 Open `research.html` (or Customer validation in the sidebar) for a separate team research workspace. Record observed task time, assistance, edits, participant role, and evidence limitations. Team rehearsals do not count as target-customer tests. Notes persist locally and export as JSON; no customer results are prefilled.
 
 See [JUDGE-READINESS.md](JUDGE-READINESS.md) for the workshop alignment, five acceptance tests, neutral test protocol, scope boundaries, and judge demo outline.
+
+## Product story and presentation fallback
+
+Open `demo.html` for a four-screen, roughly 60-second product story with actual prototype screenshots. All story assets are local. Use the PNGs in `demo-assets/` in the organizer-approved presentation format; the browser story itself is a rehearsal tool. [GORDON-REVIEW.md](GORDON-REVIEW.md) contains the judge-style critique, narration, evidence gaps, and suggested Q&A ownership.

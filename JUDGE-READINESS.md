@@ -2,6 +2,8 @@
 
 Prepared against Gordon Ho’s Session 2 bootcamp presentation supplied by the team. The deck offers workshop guidance, not a published judging rubric. Slide numbers below refer to the original deck order. No customer interviews or test results have been supplied; none are claimed here.
 
+The current prototype leads with pricing. Use [PRICING-MVP.md](PRICING-MVP.md) for the current task, formulas, five pricing acceptance tests, and demo story. The original inquiry-to-reply journey below remains available in the booking desk as supporting functionality. Customer validation now tests whether an owner can choose and explain an acceptable deal within 10 minutes.
+
 ## Customer and hypothesis
 
 Our initial segment is independent performance venues where an owner or booking manager handles inquiry emails personally. Enterprise arenas remain outside this prototype’s scope.

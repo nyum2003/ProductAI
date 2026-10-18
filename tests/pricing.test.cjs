@@ -1,0 +1,11 @@
+const {test}=require('node:test');const assert=require('node:assert/strict');
+const {StageFitPricing:{calculate}}=require('../pricing-engine.js');
+const p={capacity:350,ticket:25,fee:1.5,low:120,expected:240,high:320,operations:400,staff:240,security:180,equipment:120,rental:1920,share:35,guarantee:1200,floor:750};
+test('flat rental contribution is independent of attendance',()=>{const r=calculate(p);assert.equal(r.cost,940);assert.deepEqual(r.deals[0].rows.map(x=>x.contribution),[980,980,980]);assert.equal(r.bestDownside,'rental')});
+test('split uses net door after per-ticket fees',()=>{const r=calculate(p).deals[1].rows[1];assert.equal(r.gross,6000);assert.equal(r.fees,360);assert.equal(r.income,1974);assert.equal(r.contribution,1034);assert.equal(r.promoter,3666)});
+test('venue guarantee is a minimum rather than added to split',()=>{const r=calculate(p).deals[2];assert.equal(r.rows[0].income,1200);assert.equal(r.rows[1].income,1974)});
+test('negative promoter remainder exposes funding shortfall',()=>{const r=calculate({...p,rental:4000}).deals[0].rows[0];assert.equal(r.promoter,-1180)});
+test('break-even and contribution target use rounded-up guest counts',()=>{const d=calculate(p).deals[1];assert.equal(d.breakEven,115);assert.equal(d.targetAttendance,206)});
+test('zero sales and zero share remain defined',()=>{const r=calculate({...p,ticket:0,fee:0,share:0});assert.equal(r.deals[1].breakEven,null);assert.equal(r.deals[2].breakEven,0)});
+test('invalid capacity, order, fees, and shares are rejected',()=>{for(const patch of [{high:351},{low:250},{share:101},{fee:26},{staff:-1},{ticket:NaN},{low:1.5}])assert.throws(()=>calculate({...p,...patch}))});
+test('fractional split settlements round to cents',()=>{const r=calculate({...p,low:1,expected:1,high:1,ticket:10.01,fee:.02,share:33.3}).deals[1].rows[0];assert.equal(r.net,9.99);assert.equal(r.income,3.33);assert.equal(r.promoter,6.66)});
