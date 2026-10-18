@@ -2,7 +2,7 @@
 
 A responsive, dependency-free pricing and booking desk for independent venues, based on the included PRD.
 
-The home screen compares Flat Rate, Door Split, Base + Door Split, and Hybrid using owner-entered costs and attendance scenarios. See [PRICING-MVP.md](PRICING-MVP.md) for formulas, deal definitions, controls, and five pricing acceptance tests. The original booking desk remains at `booking.html`.
+The home screen compares Flat Rate, Door Split, Hybrid, and Best using owner-entered costs and attendance scenarios. See [PRICING-MVP.md](PRICING-MVP.md) for formulas, deal definitions, controls, and five pricing acceptance tests. The original booking desk remains at `booking.html`.
 
 ## Run locally
 

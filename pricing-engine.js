@@ -22,7 +22,7 @@
   if(n.low>n.expected||n.expected>n.high||n.high>n.capacity)throw Error('Use low ≤ expected ≤ high attendance, within room capacity.');
   if(n.share>100||n.baseShare>100||n.fee>n.ticket)throw Error('Shares must be 0–100%; ticket fees cannot exceed ticket price.');
   if(n.marginLow>n.marginTarget||n.marginTarget>n.marginHigh||n.marginHigh>80)throw Error('Profit range must contain the target margin and stay within 0–80%.');
-  if(n.rental<n.baseline||n.base<n.baseline)throw Error('Flat Rate and the Base + Door Split base cannot be below the Flat Rate baseline.');
+  if(n.rental<n.baseline||n.base<n.baseline)throw Error('Flat Rate and the Hybrid base cannot be below the Flat Rate baseline.');
   const bounds=salesBounds(n);
   if(n.minSales>n.capacity||n.minSales<1||(bounds.feasible&&n.minSales<bounds.min))throw Error('Minimum Expected Sales must be within the calculated feasible ticket range.');
   const cost=cents(n.operations+n.staff+n.security+n.equipment);
