@@ -5,7 +5,7 @@ const money=n=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',ma
 let state;try{state=JSON.parse(localStorage.getItem('stagefit-v1'))}catch{}
 if(!state||!Array.isArray(state.inquiries)||!state.venue)state={venue:{...defaults},inquiries:structuredClone(samples),ready:false};
 StageFit.refreshDemoEmails(state.inquiries);save();
-let view='inbox',filter='all',selected=null,search='';
+let view='inbox',filter='all',selected=state.inquiries.some(q=>q.id===new URLSearchParams(location.search).get('inquiry'))?new URLSearchParams(location.search).get('inquiry'):null,search='';
 function save(){try{localStorage.setItem('stagefit-v1',JSON.stringify(state));return true}catch{toast('Storage is unavailable. Keep this tab open; changes are only in memory.');return false}}
 function toast(message){$('.toast')?.remove();const el=document.createElement('div');el.className='toast';el.role='status';el.textContent=message;document.body.append(el);setTimeout(()=>el.remove(),4500)}
 function field(label,name,value,type='text',extra=''){if(type==='time'){type='text';value=StageFit.formatTime(value);extra+=' placeholder="h:mm AM/PM" pattern="(0?[1-9]|1[0-2]):[0-5][0-9] ?([Aa][Mm]|[Pp][Mm])"'}return `<div class="field"><label for="${name}">${label}</label><input id="${name}" name="${name}" type="${type}" value="${esc(value)}" ${extra}></div>`}

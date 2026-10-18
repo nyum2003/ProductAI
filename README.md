@@ -59,3 +59,5 @@ Open `demo.html` for a four-screen, roughly 60-second product story with actual 
 Artist inquiries can include optional Desired Square Footage. Explicit sq ft / sqft / square feet values are extracted from pasted inquiries unless overridden by manual entry. Venue fit compares the requested minimum room area with the venue area; area never determines approved capacity.
 
 Each inquiry includes Mentioned & Missing: source-backed topic detection, separately recorded details, and selectable follow-up questions. Detection is rule-based and may miss phrasing. Follow-up generation creates an editable draft that requires owner approval; nothing is sent automatically.
+
+The pricing desk focuses on deal comparisons. Reply drafts, approval, and email handoff are available only in the booking inbox. The pricing desk links back to the selected inquiry for follow-ups.

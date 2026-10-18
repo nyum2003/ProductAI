@@ -17,7 +17,7 @@ Margin = (venue payout - entered event costs) / venue payout. Enter a desired lo
 
 Margin and attendance sliders immediately fill offer inputs: target payout is costs / (1 - target margin), rounded up to cents and at least the baseline. Flat Rate becomes that payout; Door Split percentage targets it from expected net ticket revenue. Base stays at baseline, and its additional share targets the difference. Shares round up to 0.1% and are capped at 100%. The UI flags insufficient ticket revenue and out-of-range actual margins.
 
-Minimum-sales slider changes adjust the constraint without changing negotiated terms. Manual number edits require Recalculate. All changes invalidate previous drafts and approvals. Exceptions are required for below-baseline or below-margin downside and expected margins outside the range. Margin excludes taxes and unentered overhead.
+Minimum-sales slider changes adjust the constraint without changing negotiated terms. Manual number edits require Recalculate. The pricing desk focuses on comparison and has no reply draft, approval, or email handoff. Replies and follow-up questions live in the booking inbox. Below-target outcomes remain visible for owner review. Margin excludes taxes and unentered overhead.
 
 ## Room and time
 
@@ -31,7 +31,7 @@ Square Footage is descriptive and stored with venue settings. Approved capacity 
 4. Best pays $1,920 at 120 guests and $1,974 at 240 when the threshold is 234. With threshold 300 it still pays Flat Rate at 240.
 5. At target margin 55%, default costs and attendance produce Flat Rate $2,088.89, split 37.1%, base $1,920, and additional share 3%.
 6. Reject sales minimum above capacity or below its computed bound; flag impossible splits.
-7. After approval, moving any pricing slider clears the prior offer. Refresh preserves valid values and room details.
+7. Pricing sliders update comparisons without creating replies. Refresh preserves valid values and room details. Review inquiry & follow-ups opens the selected inquiry in the booking inbox.
 8. Curfew 11:00 PM accepts 10:30 PM finish and rejects 11:30 PM. Test noon and midnight too.
 9. At mobile width, all four models and three scenario columns remain available.
 
