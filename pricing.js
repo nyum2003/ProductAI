@@ -4,6 +4,7 @@ const percent=n=>n===null?'—':n.toFixed(1)+'%';
 const names={rental:'Flat Rate',split:'Door Split',base:'Hybrid',hybrid:'Best'};
 let workspace;try{workspace=JSON.parse(localStorage.getItem('stagefit-v1'))}catch{}
 if(!workspace?.venue||!Array.isArray(workspace.inquiries))workspace={venue:{...StageFit.defaults},inquiries:structuredClone(StageFit.samples),ready:false};
+StageFit.refreshDemoEmails(workspace.inquiries);try{localStorage.setItem('stagefit-v1',JSON.stringify(workspace))}catch{}
 const venue=workspace.venue,events=workspace.inquiries.length?workspace.inquiries:StageFit.samples;
 let model;try{model=JSON.parse(localStorage.getItem('stagefit-pricing-v2'))}catch{}
 let event=events.find(q=>q.id===new URLSearchParams(location.search).get('inquiry'))||events.find(q=>q.id===model?.event)||events[0];

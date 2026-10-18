@@ -4,6 +4,7 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 const money=n=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(n);
 let state;try{state=JSON.parse(localStorage.getItem('stagefit-v1'))}catch{}
 if(!state||!Array.isArray(state.inquiries)||!state.venue)state={venue:{...defaults},inquiries:structuredClone(samples),ready:false};
+StageFit.refreshDemoEmails(state.inquiries);save();
 let view='inbox',filter='all',selected=null,search='';
 function save(){try{localStorage.setItem('stagefit-v1',JSON.stringify(state));return true}catch{toast('Storage is unavailable. Keep this tab open; changes are only in memory.');return false}}
 function toast(message){$('.toast')?.remove();const el=document.createElement('div');el.className='toast';el.role='status';el.textContent=message;document.body.append(el);setTimeout(()=>el.remove(),4500)}
