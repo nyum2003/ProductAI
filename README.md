@@ -55,3 +55,7 @@ See [JUDGE-READINESS.md](JUDGE-READINESS.md) for the workshop alignment, five ac
 ## Product story and presentation fallback
 
 Open `demo.html` for a four-screen, roughly 60-second product story with actual prototype screenshots. All story assets are local. Use the PNGs in `demo-assets/` in the organizer-approved presentation format; the browser story itself is a rehearsal tool. [GORDON-REVIEW.md](GORDON-REVIEW.md) contains the judge-style critique, narration, evidence gaps, and suggested Q&A ownership.
+
+Artist inquiries can include optional Desired Square Footage. Explicit sq ft / sqft / square feet values are extracted from pasted inquiries unless overridden by manual entry. Venue fit compares the requested minimum room area with the venue area; area never determines approved capacity.
+
+Each inquiry includes Mentioned & Missing: source-backed topic detection, separately recorded details, and selectable follow-up questions. Detection is rule-based and may miss phrasing. Follow-up generation creates an editable draft that requires owner approval; nothing is sent automatically.
